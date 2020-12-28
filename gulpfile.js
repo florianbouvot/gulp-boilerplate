@@ -23,41 +23,40 @@ var env = process.env.NODE_ENV;
 
 
 // Styles task
-var styles = function (done) {
+var css = function (done) {
   // Make sure this feature is activated before running
-	if (!pkg.tasks.styles) return done();
+	if (!pkg.tasks.css) return done();
 
-  return src(pkg.paths.styles.input)
+  return src(pkg.paths.src.css + '**/*.scss')
     .pipe(sass())
     .pipe(postcss())
     .pipe(gulpif(env === "production", csso()))
-    .pipe(rename({ suffix: '.min' }))
     .pipe(size({ title: 'CSS', gzip: true, showFiles: true }))
-    .pipe(dest(pkg.paths.styles.output))
+    .pipe(dest(pkg.paths.dist.css))
     .pipe(browserSync.stream());
 }
 
 
 // Scripts task
-var scripts = function (done) {
+var js = function (done) {
   // Make sure this feature is activated before running
-	if (!pkg.tasks.scripts) return done();
+	if (!pkg.tasks.js) return done();
 
-  return src(pkg.globs.scripts)
-    .pipe(concat(pkg.vars.scripts))
+  return src(pkg.globs.js)
+    .pipe(concat(pkg.vars.js))
     .pipe(gulpif(env === "production", terser()))
     .pipe(size({ title: 'JS', gzip: true }))
-    .pipe(dest(pkg.paths.scripts.output));
+    .pipe(dest(pkg.paths.dist.js));
 }
 
 
 // Images task
-var images = function (done) {
+var img = function (done) {
   // Make sure this feature is activated before running
-	if (!pkg.tasks.images) return done();
+	if (!pkg.tasks.img) return done();
 
-  return src(pkg.paths.images.input)
-    .pipe(changed(pkg.paths.images.input))
+  return src(pkg.paths.src.img + '**/*.{gif,jpg,png,svg,ico}')
+    .pipe(changed(pkg.paths.src.img + '**/*.{gif,jpg,png,svg,ico}'))
     .pipe(gulpif(env === "production", imagemin([
       imagemin.gifsicle({ interlaced: true }),
       imagemin.mozjpeg({ quality: 50, progressive: true }),
@@ -65,21 +64,21 @@ var images = function (done) {
       imagemin.svgo()
     ])))
     .pipe(size({ title: 'Images', gzip: true }))
-    .pipe(dest(pkg.paths.images.output));
+    .pipe(dest(pkg.paths.dist.img));
 }
 
 
-// Sprites task
-var sprites = function (done) {
+// Stripe task
+var stripe = function (done) {
   // Make sure this feature is activated before running
-	if (!pkg.tasks.sprites) return done();
+	if (!pkg.tasks.stripe) return done();
 
-  return src(pkg.paths.sprites.input)
+  return src(pkg.paths.src.stripe + '**/*.svg')
     .pipe(svgmin({ plugins: [{ removeViewBox: false }] }))
     .pipe(svgSymbols({ templates: ['default-svg'] }))
-    .pipe(rename(pkg.vars.sprites))
-    .pipe(size({ title: 'Sprites', gzip: true }))
-    .pipe(dest(pkg.paths.sprites.output));
+    .pipe(rename(pkg.vars.stripe))
+    .pipe(size({ title: 'Stripe', gzip: true }))
+    .pipe(dest(pkg.paths.dist.stripe));
 }
 
 
@@ -88,9 +87,9 @@ var fonts = function (done) {
   // Make sure this feature is activated before running
 	if (!pkg.tasks.fonts) return done();
 
-  return src(pkg.paths.fonts.input)
-    .pipe(changed(pkg.paths.fonts.input))
-    .pipe(dest(pkg.paths.fonts.output));
+  return src(pkg.paths.src.fonts + '**/*.{woff,woff2}')
+    .pipe(changed(pkg.paths.src.fonts + '**/*.{woff,woff2}'))
+    .pipe(dest(pkg.paths.dist.fonts));
 }
 
 
@@ -99,9 +98,9 @@ var templates = function (done) {
 	// Make sure this feature is activated before running
 	if (!pkg.tasks.templates) return done();
 
-	return src(pkg.paths.templates.input)
+  return src(pkg.paths.templates + '*.html')
 		.pipe(nunjucks.compile())
-    .pipe(dest(pkg.paths.templates.output));
+    .pipe(dest(pkg.paths.dist.base));
 };
 
 
@@ -110,11 +109,11 @@ var revision = function (done) {
   // Make sure this feature is activated before running
 	if (!pkg.tasks.revision) return done();
 
-  return src([pkg.paths.styles.output + '*.css', pkg.paths.scripts.output + '*.js'], { base: pkg.paths.revision })
+  return src([pkg.paths.dist.css + '*.css', pkg.paths.dist.js + '*.js'], { base: pkg.paths.dist.base })
     .pipe(rev())
-    .pipe(dest(pkg.paths.revision))
+    .pipe(dest(pkg.paths.dist.base))
     .pipe(rev.manifest())
-    .pipe(dest(pkg.paths.revision));
+    .pipe(dest(pkg.paths.dist.base));
 
   done()
 }
@@ -148,6 +147,7 @@ var startServer = function (done) {
 	done();
 };
 
+
 // Reload the browser when files change
 var reloadBrowser = function (done) {
   // Make sure this feature is activated before running
@@ -159,18 +159,19 @@ var reloadBrowser = function (done) {
   done();
 };
 
+
 // Watch for changes
 var watchSource = function (done) {
 	// Make sure this feature is activated before running
   if (!pkg.tasks.reload) return done();
 
-  watch(pkg.paths.styles.input, series(styles));
-  watch(pkg.paths.tailwind, series(styles));
-  watch(pkg.paths.scripts.input, series(scripts, reloadBrowser));
-  watch(pkg.paths.images.input, series(images));
-  watch(pkg.paths.sprites.input, series(sprites));
-  watch(pkg.paths.fonts.input, series(fonts));
-  watch(pkg.paths.templates.input, series(templates, reloadBrowser));
+  watch(pkg.paths.src.css + '**/*.scss', series(css));
+  watch(pkg.paths.tailwind, series(css));
+  watch(pkg.paths.src.js + '**/*.js', series(js, reloadBrowser));
+  watch(pkg.paths.src.img + '**/*.{gif,jpg,png,svg,ico}', series(img));
+  watch(pkg.paths.src.stripe + '**/*.svg', series(stripe));
+  watch(pkg.paths.src.fonts + '**/*.{woff,woff2}', series(fonts));
+  watch(pkg.paths.templates + '**/*.html', series(templates, reloadBrowser));
 
   // Signal completion
   done();
@@ -180,7 +181,7 @@ var watchSource = function (done) {
 // Default task
 exports.default = series(
   clean,
-  parallel(styles, scripts, images, sprites, fonts, templates),
+  parallel(css, js, img, stripe, fonts, templates),
   startServer,
   watchSource,
 );
@@ -189,6 +190,6 @@ exports.default = series(
 // Build task
 exports.build = series(
   clean,
-  parallel(styles, scripts, images, sprites, fonts, templates),
+  parallel(css, js, img, stripe, fonts, templates),
   revision
 );

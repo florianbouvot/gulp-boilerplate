@@ -34,10 +34,10 @@
     "defaults"
   ],
   "tasks": {
-    "styles": true,
-    "scripts": true,
-    "images": true,
-    "sprites": true,
+    "css": true,
+    "js": true,
+    "img": true,
+    "sprite": true,
     "fonts": true,
     "templates": true,
     "revision": true,
@@ -45,47 +45,39 @@
     "reload": true
   },
   "paths": {
-    "styles": {
-      "input": "src/css/**/*.scss",
-      "output": "dist/css/"
+    "src": {
+      "base": "src/",
+      "css": "src/css/",
+      "js": "src/js/",
+      "img": "src/img/",
+      "stripe": "src/icons/",
+      "fonts": "src/fonts/"
     },
-    "scripts": {
-      "input": "src/js/**/*.js",
-      "output": "dist/js/"
-    },
-    "images": {
-      "input": "src/img/**/*.{gif,jpg,png,svg,ico}",
-      "output": "dist/img/"
-    },
-    "sprites": {
-      "input": "src/icons/*.svg",
-      "output": "dist/sprites/"
-    },
-    "fonts": {
-      "input": "src/fonts/**/*.{woff,woff2}",
-      "output": "dist/fonts/"
-    },
-    "templates": {
-      "input": "src/templates/*.html",
-      "output": "dist/"
+    "dist": {
+      "base": "dist/",
+      "css": "dist/css/",
+      "js": "dist/js/",
+      "img": "dist/img/",
+      "stripe": "dist/sprite/",
+      "fonts": "dist/fonts/"
     },
     "clean": [
       "dist/**/*",
       "!dist/"
     ],
+    "templates": "src/templates/",
     "tailwind": "tailwind.config.js",
-    "revision": "dist/",
     "reload": "./dist"
   },
   "globs": {
-    "scripts": [
+    "js": [
       "node_modules/alpinejs/dist/alpine.js",
       "src/js/main.js"
     ]
   },
   "vars": {
-    "scripts": "main.min.js",
-    "sprites": "icons.svg"
+    "js": "main.js",
+    "stripe": "icons.svg"
   },
   "scripts": {
     "start": "gulp",
