@@ -27,7 +27,7 @@ var styles = function (done) {
   // Make sure this feature is activated before running
 	if (!pkg.tasks.styles) return done();
 
-  return src(pkg.paths.styles.input + '**/*.scss')
+  return src(pkg.paths.styles.input)
     .pipe(sass())
     .pipe(postcss())
     .pipe(gulpif(env === "production", csso()))
@@ -56,8 +56,8 @@ var images = function (done) {
   // Make sure this feature is activated before running
 	if (!pkg.tasks.images) return done();
 
-  return src(pkg.paths.images.input + '**/*.{gif,jpg,png,svg,ico}')
-    .pipe(changed(pkg.paths.images.input + '**/*.{gif,jpg,png,svg,ico}'))
+  return src(pkg.paths.images.input)
+    .pipe(changed(pkg.paths.images.input))
     .pipe(gulpif(env === "production", imagemin([
       imagemin.gifsicle({ interlaced: true }),
       imagemin.mozjpeg({ quality: 50, progressive: true }),
@@ -74,7 +74,7 @@ var sprites = function (done) {
   // Make sure this feature is activated before running
 	if (!pkg.tasks.sprites) return done();
 
-  return src(pkg.paths.sprites.input + '*.svg')
+  return src(pkg.paths.sprites.input)
     .pipe(svgmin({ plugins: [{ removeViewBox: false }] }))
     .pipe(svgSymbols({ templates: ['default-svg'] }))
     .pipe(rename(pkg.vars.sprites))
@@ -88,8 +88,8 @@ var fonts = function (done) {
   // Make sure this feature is activated before running
 	if (!pkg.tasks.fonts) return done();
 
-  return src(pkg.paths.fonts.input + '**/*.{woff,woff2}')
-    .pipe(changed(pkg.paths.fonts.input + '**/*.{woff,woff2}'))
+  return src(pkg.paths.fonts.input)
+    .pipe(changed(pkg.paths.fonts.input))
     .pipe(dest(pkg.paths.fonts.output));
 }
 
@@ -110,11 +110,11 @@ var revision = function (done) {
   // Make sure this feature is activated before running
 	if (!pkg.tasks.revision) return done();
 
-  return src([pkg.paths.styles.output + '*.css', pkg.paths.scripts.output + '*.js'], { base: pkg.paths.rev })
+  return src([pkg.paths.styles.output + '*.css', pkg.paths.scripts.output + '*.js'], { base: pkg.paths.revision })
     .pipe(rev())
-    .pipe(dest(pkg.paths.rev))
+    .pipe(dest(pkg.paths.revision))
     .pipe(rev.manifest())
-    .pipe(dest(pkg.paths.rev));
+    .pipe(dest(pkg.paths.revision));
 
   done()
 }
@@ -164,12 +164,12 @@ var watchSource = function (done) {
 	// Make sure this feature is activated before running
   if (!pkg.tasks.reload) return done();
 
-  watch(pkg.paths.styles.input + '**/*.scss', series(styles));
+  watch(pkg.paths.styles.input, series(styles));
   watch(pkg.paths.tailwind, series(styles));
-  watch(pkg.paths.scripts.input + '**/*.js', series(parallel(scripts), reloadBrowser));
-  watch(pkg.paths.images.input + '**/*.{gif,jpg,png,svg,ico}', series(images));
-  watch(pkg.paths.sprites.input + '*.svg', series(sprites));
-  watch(pkg.paths.fonts.input + '**/*.{woff,woff2}', series(fonts));
+  watch(pkg.paths.scripts.input, series(scripts, reloadBrowser));
+  watch(pkg.paths.images.input, series(images));
+  watch(pkg.paths.sprites.input, series(sprites));
+  watch(pkg.paths.fonts.input, series(fonts));
   watch(pkg.paths.templates.input, series(templates, reloadBrowser));
 
   // Signal completion

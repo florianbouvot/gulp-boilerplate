@@ -46,27 +46,27 @@
   },
   "paths": {
     "styles": {
-      "input": "src/css/",
+      "input": "src/css/**/*.scss",
       "output": "dist/css/"
     },
     "scripts": {
-      "input": "src/js/",
+      "input": "src/js/**/*.js",
       "output": "dist/js/"
     },
     "images": {
-      "input": "src/img/",
+      "input": "src/img/**/*.{gif,jpg,png,svg,ico}",
       "output": "dist/img/"
     },
     "sprites": {
-      "input": "src/icons/",
+      "input": "src/icons/*.svg",
       "output": "dist/sprites/"
     },
     "fonts": {
-      "input": "src/fonts/",
+      "input": "src/fonts/**/*.{woff,woff2}",
       "output": "dist/fonts/"
     },
     "templates": {
-      "input": "src/templates/**/*.{html,twig}",
+      "input": "src/templates/*.html",
       "output": "dist/"
     },
     "clean": [
@@ -74,7 +74,7 @@
       "!dist/"
     ],
     "tailwind": "tailwind.config.js",
-    "rev": "dist/assets",
+    "revision": "dist/",
     "reload": "./dist"
   },
   "globs": {
