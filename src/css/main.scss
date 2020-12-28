@@ -2,12 +2,9 @@
 
 // Base
 @tailwind base;
+
 // Components
 @tailwind components;
 
 // Utilities
 @tailwind utilities;
-
-body {
-  @apply bg-green-500;
-}
