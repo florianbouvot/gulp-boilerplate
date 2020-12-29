@@ -30,7 +30,7 @@ A boilerplate for building web projects with Gulp 4.
 
 ### Prerequisites
 
-Note: if you've previously installed Gulp globally, run `npm rm --global gulp` or `yarn global remove gulp` to remove it. (Details here)[https://medium.com/gulpjs/gulp-sips-command-line-interface-e53411d4467].
+Note: if you've previously installed Gulp globally, run `npm rm --global gulp` or `yarn global remove gulp` to remove it. [Details here](https://medium.com/gulpjs/gulp-sips-command-line-interface-e53411d4467).
 
 Make sure these are installed first.
 
