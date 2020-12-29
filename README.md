@@ -1,12 +1,12 @@
 # Gulp Boilerplate
 
-A boilerplate for building web projects with Gulp.
+A boilerplate for building web projects with Gulp 4.
 
 **Features**
 
 * CSS
-  * Sass
-  * PostCSS (Tailwindcss, Autoprefixer)
+  * Sass compilation
+  * PostCSS transformation (Tailwindcss, Autoprefixer)
   * Minify with CSSO (in production)
   * File versioning for cache-busting (in production)
 * JavaScript
@@ -17,8 +17,8 @@ A boilerplate for building web projects with Gulp.
   * Copy
   * Optimize with imagemin (in production)
 * SVG sprite
-  * Optimize icons with SVGO
-  * Generate sprite
+  * Optimize SVG with SVGO
+  * Converts SVG files to SVG sprite
 * Fonts
   * Copy
 * Runs a web server (Browsersync) for style injection, auto-refreshing and cross-device synchronization
@@ -28,17 +28,22 @@ A boilerplate for building web projects with Gulp.
 
 ## Getting Started
 
-Note: if you've previously installed Gulp globally, run `yarn global remove gulp` to remove it. (Details here)[https://medium.com/gulpjs/gulp-sips-command-line-interface-e53411d4467].
+### Prerequisites
 
-Prerequisites : 
-  * [Node.js](https://nodejs.org/)
-  * [Gulp Command Line Utility](http://gulpjs.com/)
+Note: if you've previously installed Gulp globally, run `npm rm --global gulp` or `yarn global remove gulp` to remove it. (Details here)[https://medium.com/gulpjs/gulp-sips-command-line-interface-e53411d4467].
 
-1. In bash/terminal/command line, cd into your project directory.
-2. Run `yarn install` to install required dependencies.
-3. When it's done installing, run one of the task runners to get going:
-  * `yarn dev` serve, watch for changes and automatically refresh across devices.
-  * `yarn prod` build current project, ready for test or deployment.
+Make sure these are installed first.
+
+* [Node.js](https://nodejs.org/)
+* [Gulp Command Line Utility](http://gulpjs.com/)
+
+### Quick Start
+
+1. In bash/terminal/command line, `cd` into your project directory.
+2. Run `npm install` or `yarn install`.
+3. Run tasks :
+  * Development server `npm run dev` or `yarn dev`
+  * Production build `npm run prod` or `yarn prod`
 
 ## Futher reading
 
