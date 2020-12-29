@@ -7,6 +7,7 @@ A boilerplate for building web projects with Gulp 4.
 * CSS
   * Sass compilation
   * PostCSS transformation (Tailwindcss, Autoprefixer)
+  * Remove unused CSS with PurgeCSS
   * Minify with CSSO (in production)
   * File versioning for cache-busting (in production)
 * JavaScript
