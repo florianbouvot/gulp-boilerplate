@@ -68,17 +68,17 @@ var img = function (done) {
 }
 
 
-// Stripe task
-var stripe = function (done) {
+// Sprite task
+var sprite = function (done) {
   // Make sure this feature is activated before running
-	if (!pkg.tasks.stripe) return done();
+	if (!pkg.tasks.sprite) return done();
 
-  return src(pkg.paths.src.stripe + '**/*.svg')
+  return src(pkg.paths.src.sprite + '**/*.svg')
     .pipe(svgmin({ plugins: [{ removeViewBox: false }] }))
     .pipe(svgSymbols({ templates: ['default-svg'] }))
-    .pipe(rename(pkg.vars.stripe))
-    .pipe(size({ title: 'Stripe', gzip: true }))
-    .pipe(dest(pkg.paths.dist.stripe));
+    .pipe(rename(pkg.vars.sprite))
+    .pipe(size({ title: 'sprite', gzip: true }))
+    .pipe(dest(pkg.paths.dist.sprite));
 }
 
 
@@ -169,7 +169,7 @@ var watchSource = function (done) {
   watch(pkg.paths.tailwind, series(css));
   watch(pkg.paths.src.js + '**/*.js', series(js, reloadBrowser));
   watch(pkg.paths.src.img + '**/*.{gif,jpg,png,svg,ico}', series(img));
-  watch(pkg.paths.src.stripe + '**/*.svg', series(stripe));
+  watch(pkg.paths.src.sprite + '**/*.svg', series(sprite));
   watch(pkg.paths.src.fonts + '**/*.{woff,woff2}', series(fonts));
   watch(pkg.paths.templates + '**/*.html', series(templates, reloadBrowser));
 
@@ -181,15 +181,15 @@ var watchSource = function (done) {
 // Default task
 exports.default = series(
   clean,
-  parallel(css, js, img, stripe, fonts, templates),
+  parallel(css, js, img, sprite, fonts, templates),
   startServer,
   watchSource,
 );
 
 
-// Build task
-exports.build = series(
+// Production task
+exports.prod = series(
   clean,
-  parallel(css, js, img, stripe, fonts, templates),
+  parallel(css, js, img, sprite, fonts, templates),
   revision
 );

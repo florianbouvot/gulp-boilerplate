@@ -50,7 +50,7 @@
       "css": "src/css/",
       "js": "src/js/",
       "img": "src/img/",
-      "stripe": "src/icons/",
+      "sprite": "src/icons/",
       "fonts": "src/fonts/"
     },
     "dist": {
@@ -58,7 +58,7 @@
       "css": "dist/css/",
       "js": "dist/js/",
       "img": "dist/img/",
-      "stripe": "dist/sprite/",
+      "sprite": "dist/sprite/",
       "fonts": "dist/fonts/"
     },
     "clean": [
@@ -77,10 +77,10 @@
   },
   "vars": {
     "js": "main.js",
-    "stripe": "icons.svg"
+    "sprite": "icons.svg"
   },
   "scripts": {
-    "start": "gulp",
-    "build": "NODE_ENV=production gulp build"
+    "dev": "gulp",
+    "prod": "NODE_ENV=production gulp prod"
   }
 }
