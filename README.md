@@ -24,7 +24,7 @@ A boilerplate for building web projects with Gulp 4.
 * Runs a web server (Browsersync) for style injection, auto-refreshing and cross-device synchronization
 * Runs a file watcher (native Gulp feature) for running the right tasks on the right files and doing the above things
 
-*Nunjunks templates are only present for the demo*
+*Nunjunks templates are only present for the demo.*
 
 ## Getting Started
 
