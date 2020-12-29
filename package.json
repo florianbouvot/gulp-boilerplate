@@ -37,7 +37,7 @@
     "css": true,
     "js": true,
     "img": true,
-    "sprite": true,
+    "sprites": true,
     "fonts": true,
     "templates": true,
     "revision": true,
@@ -50,7 +50,7 @@
       "css": "src/css/",
       "js": "src/js/",
       "img": "src/img/",
-      "sprite": "src/icons/",
+      "sprites": "src/icons/",
       "fonts": "src/fonts/"
     },
     "dist": {
@@ -58,7 +58,7 @@
       "css": "dist/css/",
       "js": "dist/js/",
       "img": "dist/img/",
-      "sprite": "dist/sprite/",
+      "sprites": "dist/sprites/",
       "fonts": "dist/fonts/"
     },
     "clean": [
@@ -77,7 +77,7 @@
   },
   "vars": {
     "js": "main.js",
-    "sprite": "icons.svg"
+    "sprites": "icons.svg"
   },
   "scripts": {
     "dev": "gulp",

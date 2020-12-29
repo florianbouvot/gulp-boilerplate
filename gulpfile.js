@@ -68,17 +68,17 @@ var img = function (done) {
 }
 
 
-// Sprite task
-var sprite = function (done) {
+// Sprites task
+var sprites = function (done) {
   // Make sure this feature is activated before running
-	if (!pkg.tasks.sprite) return done();
+	if (!pkg.tasks.sprites) return done();
 
-  return src(pkg.paths.src.sprite + '**/*.svg')
+  return src(pkg.paths.src.sprites + '**/*.svg')
     .pipe(svgmin({ plugins: [{ removeViewBox: false }] }))
     .pipe(svgSymbols({ templates: ['default-svg'] }))
-    .pipe(rename(pkg.vars.sprite))
-    .pipe(size({ title: 'sprite', gzip: true }))
-    .pipe(dest(pkg.paths.dist.sprite));
+    .pipe(rename(pkg.vars.sprites))
+    .pipe(size({ title: 'sprites', gzip: true }))
+    .pipe(dest(pkg.paths.dist.sprites));
 }
 
 
@@ -169,7 +169,7 @@ var watchSource = function (done) {
   watch(pkg.paths.tailwind, series(css));
   watch(pkg.paths.src.js + '**/*.js', series(js, reloadBrowser));
   watch(pkg.paths.src.img + '**/*.{gif,jpg,png,svg,ico}', series(img));
-  watch(pkg.paths.src.sprite + '**/*.svg', series(sprite));
+  watch(pkg.paths.src.sprites + '**/*.svg', series(sprites));
   watch(pkg.paths.src.fonts + '**/*.{woff,woff2}', series(fonts));
   watch(pkg.paths.templates + '**/*.html', series(templates, reloadBrowser));
 
@@ -181,7 +181,7 @@ var watchSource = function (done) {
 // Default task
 exports.default = series(
   clean,
-  parallel(css, js, img, sprite, fonts, templates),
+  parallel(css, js, img, sprites, fonts, templates),
   startServer,
   watchSource,
 );
@@ -190,6 +190,6 @@ exports.default = series(
 // Production task
 exports.prod = series(
   clean,
-  parallel(css, js, img, sprite, fonts, templates),
+  parallel(css, js, img, sprites, fonts, templates),
   revision
 );

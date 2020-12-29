@@ -2,9 +2,11 @@
 
 // Base
 @tailwind base;
+@import "base/font-face";
 
 // Components
 @tailwind components;
+@import "components/icon";
 
 // Utilities
 @tailwind utilities;

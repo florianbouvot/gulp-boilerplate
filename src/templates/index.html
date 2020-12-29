@@ -1,5 +1,58 @@
 {% extends "layouts/base.html" %}
 
-{% block main %}
-  <h1>Hello world !</h1>
+{% block content %}
+  <div class="sm:max-w-xl w-full py-6">
+
+    <div class="bg-white shadow-md overflow-hidden
+      sm:rounded-lg md:flex">
+      <div class="relative pb-16x9 md:pb-0 md:w-2/5">
+        <img class="object-cover
+          absolute inset-0 h-full w-full rounded-none"
+          src="img/justyna-ziobrowska-orFGUQj4Nc4-unsplash.jpg" alt="Bavouille l'escargot">
+      </div>
+      <div class="p-6 space-y-4 md:w-3/5">
+
+        <h1 class="text-2xl font-bold">Bavouille l'escargot</h1>
+
+        <p class="text-gray-600">Quand le temps est à la pluie il se promene dans nos jardins.</p>
+
+        <div>
+          <h2 class="mb-2 text-green-600 text-xs font-bold uppercase">Repas préféré</h2>
+
+          <div class="flex flex-wrap space-x-3">
+            {% for item in ['laitue', 'carotte', 'pomme'] %}
+              <div class="flex justify-center items-center h-11 w-11 text-white border rounded-full">
+                <svg class="c-icon h-6 w-6 fill-current" aria-hidden="true">
+                  <use xlink:href="sprites/icons.svg#{{ item }}"></use>
+                </svg>
+                <span class="sr-only">{{ item }}</span>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="mt-4 text-gray-600 text-sm text-center" x-data="{ open: false }">
+      <button class="inline-flex items-center underline" type="button" @click="open = true">
+        Crédits
+        <svg class="h-5 w-5 mr-1 text-gray-400" :class="{ 'hidden': open, 'block': !open }" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+        <svg class="h-5 w-5 mr-1 text-gray-400" :class="{ 'block': open, 'hidden': !open }" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd" />
+        </svg>
+      </button>
+
+      <div class="mt-1" x-show="open" @click.away="open = false">
+        <p>
+          Photo by Justyna Ziobrowska from Unsplash
+          <br>
+          Icons designed by Freepik from Flaticon
+        </p>
+      </div>
+    </div>
+
+  </div>
 {% endblock %}

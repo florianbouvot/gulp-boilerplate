@@ -9,7 +9,14 @@ module.exports = {
   },
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'sans': ['Roboto', 'sans-serif'],
+      },
+      padding: {
+        '16x9': '56.25%',
+      },
+    },
   },
   variants: {
     extend: {},
