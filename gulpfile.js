@@ -17,8 +17,6 @@ var size = require('gulp-size');
 var svgmin = require('gulp-svgmin');
 var svgSymbols = require('gulp-svg-symbols');
 var terser = require('gulp-terser');
-var env = process.env.NODE_ENV;
-
 
 
 // Styles task
