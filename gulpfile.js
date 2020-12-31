@@ -30,7 +30,7 @@ var css = function (done) {
   return src(pkg.paths.src.css + '**/*.scss')
     .pipe(sass())
     .pipe(postcss())
-    .pipe(gulpif(env === "production", csso()))
+    .pipe(csso())
     .pipe(size({ title: 'CSS', gzip: true, showFiles: true }))
     .pipe(dest(pkg.paths.dist.css))
     .pipe(browserSync.stream());
