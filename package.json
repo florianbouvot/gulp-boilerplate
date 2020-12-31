@@ -16,7 +16,6 @@
     "gulp-changed": "^4.0.2",
     "gulp-concat": "^2.6.1",
     "gulp-csso": "^4.0.1",
-    "gulp-if": "^3.0.0",
     "gulp-imagemin": "^7.1.0",
     "gulp-nunjucks": "^5.1.0",
     "gulp-postcss": "^9.0.0",
@@ -28,7 +27,7 @@
     "gulp-svgmin": "^3.0.0",
     "gulp-terser": "^2.0.0",
     "imagemin-pngquant": "^9.0.1",
-    "postcss": "^8.2.1"
+    "postcss": "^8.2.2"
   },
   "browserslist": [
     "defaults"
