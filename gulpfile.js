@@ -74,7 +74,7 @@ var sprites = function (done) {
     .pipe(svgmin({ plugins: [{ removeViewBox: false }] }))
     .pipe(svgSymbols({ templates: ['default-svg'] }))
     .pipe(rename(pkg.vars.sprites))
-    .pipe(size({ title: 'sprites', gzip: true }))
+    .pipe(size({ title: 'Sprites', gzip: true }))
     .pipe(dest(pkg.paths.dist.sprites));
 }
 
