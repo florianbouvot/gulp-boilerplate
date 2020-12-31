@@ -8,15 +8,15 @@ A boilerplate for building web projects with Gulp 4.
   * Sass compilation
   * PostCSS transformation (Tailwindcss, Autoprefixer)
   * Remove unused CSS with PurgeCSS
-  * Minify with CSSO (in production)
+  * Minify with CSSO
   * File versioning for cache-busting (in production)
 * JavaScript
   * Concatenate
-  * Minify with terser (in production)
+  * Minify with terser
   * File versioning for cache-busting (in production)
 * Images
   * Copy
-  * Optimize with imagemin (in production)
+  * Optimize with imagemin
 * SVG sprite
   * Optimize SVG with SVGO
   * Converts SVG files to SVG sprite
