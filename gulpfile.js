@@ -5,7 +5,6 @@ var browserSync = require('browser-sync');
 var changed = require('gulp-changed');
 var concat = require('gulp-concat');
 var csso = require('gulp-csso');
-var gulpif = require('gulp-if');
 var del = require('del');
 var imagemin = require('gulp-imagemin');
 var nunjucks = require('gulp-nunjucks');
@@ -44,7 +43,7 @@ var js = function (done) {
 
   return src(pkg.globs.js)
     .pipe(concat(pkg.vars.js))
-    .pipe(gulpif(env === "production", terser()))
+    .pipe(terser())
     .pipe(size({ title: 'JS', gzip: true }))
     .pipe(dest(pkg.paths.dist.js));
 }
@@ -57,12 +56,12 @@ var img = function (done) {
 
   return src(pkg.paths.src.img + '**/*.{gif,jpg,png,svg,ico}')
     .pipe(changed(pkg.paths.src.img + '**/*.{gif,jpg,png,svg,ico}'))
-    .pipe(gulpif(env === "production", imagemin([
+    .pipe(imagemin([
       imagemin.gifsicle({ interlaced: true }),
       imagemin.mozjpeg({ quality: 50, progressive: true }),
       pngquant({ quality: [0.5, 0.5] }),
       imagemin.svgo()
-    ])))
+    ]))
     .pipe(size({ title: 'Images', gzip: true }))
     .pipe(dest(pkg.paths.dist.img));
 }
