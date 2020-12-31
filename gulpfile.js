@@ -112,6 +112,7 @@ var revision = function (done) {
     .pipe(rev.manifest())
     .pipe(dest(pkg.paths.dist.base));
 
+  // Signal completion
   done()
 }
 
