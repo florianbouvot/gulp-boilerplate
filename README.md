@@ -6,6 +6,7 @@ A boilerplate for building web projects with Gulp 4.
 
 * CSS
   * Sass compilation
+  * Copy and rename CSS vendor to allow Sass import 
   * PostCSS transformation (Tailwindcss, Autoprefixer)
   * Remove unused CSS with PurgeCSS
   * Minify with CSSO
@@ -24,6 +25,8 @@ A boilerplate for building web projects with Gulp 4.
   * Copy
 * Runs a web server (Browsersync) for style injection, auto-refreshing and cross-device synchronization
 * Runs a file watcher (native Gulp feature) for running the right tasks on the right files and doing the above things
+
+**Tasks are configurable and can be easily turn on and off** in [`gulp.config.js`](https://github.com/florianbouvot/gulp-boilerplate/blob/main/gulp.config.js).
 
 *Nunjunks templates are only present for the demo.*
 
