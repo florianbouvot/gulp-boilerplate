@@ -6,6 +6,7 @@
   "license": "MIT",
   "dependencies": {
     "alpinejs": "^2.8.0",
+    "baguettebox.js": "^1.11.1",
     "tailwindcss": "^2.0.2"
   },
   "devDependencies": {

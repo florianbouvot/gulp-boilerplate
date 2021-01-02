@@ -6,12 +6,14 @@ module.exports = {
   },
   cssVendor: {
     src: [
+      'node_modules/baguettebox.js/dist/baguettebox.css',
     ],
     dist: 'src/css/vendor/',
   },
   js: {
     src: [
       'node_modules/alpinejs/dist/alpine.js',
+      'node_modules/baguettebox.js/dist/baguettebox.js',
       'src/js/main.js',
     ],
     dist: 'dist/js/',
@@ -51,7 +53,7 @@ module.exports = {
   },
   tasks: {
     css: true,
-    cssVendor: false,
+    cssVendor: true,
     js: true,
     img: true,
     svgSprite: true,
