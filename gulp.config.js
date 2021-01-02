@@ -11,8 +11,8 @@ module.exports = {
   },
   js: {
     src: [
-      "node_modules/alpinejs/dist/alpine.js",
-      "src/js/main.js",
+      'node_modules/alpinejs/dist/alpine.js',
+      'src/js/main.js',
     ],
     dist: 'dist/js/',
     name: 'main.js',
@@ -39,9 +39,9 @@ module.exports = {
     base: 'dist/',
   },
   clean: [
-    "src/vendor/",
-    "dist/**/*",
-    "!dist/",
+    'src/vendor/',
+    'dist/**/*',
+    '!dist/',
   ],
   tailwind: 'tailwind.config.js',
   templates: {
