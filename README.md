@@ -51,8 +51,9 @@ Make sure these are installed first.
 
 ## Futher reading
 
-* [Integrating gulp-rev into your app](https://github.com/sindresorhus/gulp-rev/blob/master/integration.md)
-* [A Better package.json for the Frontend](https://nystudio107.com/blog/a-better-package-json-for-the-frontend)
+* [Integrating gulp-rev into your app](https://github.com/sindresorhus/gulp-rev/blob/master/integration.md) from Sindre Sorhus
+* [A Better package.json for the Frontend](https://nystudio107.com/blog/a-better-package-json-for-the-frontend) from Andrew Welch 
+* [Gulp Boilerplate](https://github.com/cferdinandi/gulp-boilerplate) from Chris Ferdinandi
 
 ## License
 
