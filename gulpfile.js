@@ -1,59 +1,70 @@
-// Requires
-var {gulp, src, dest, watch, series, parallel} = require('gulp');
-var pkg = require('./package.json');
-var browserSync = require('browser-sync');
-var changed = require('gulp-changed');
-var concat = require('gulp-concat');
-var csso = require('gulp-csso');
-var del = require('del');
-var imagemin = require('gulp-imagemin');
-var nunjucks = require('gulp-nunjucks');
-var pngquant = require('imagemin-pngquant');
-var postcss = require('gulp-postcss');
-var rename = require('gulp-rename');
-var rev = require('gulp-rev');
-var sass = require('gulp-sass');
-var size = require('gulp-size');
-var svgmin = require('gulp-svgmin');
-var svgSymbols = require('gulp-svg-symbols');
-var terser = require('gulp-terser');
+const config = require('./gulp.config.js');
+const {gulp, src, dest, watch, series, parallel} = require('gulp');
+const browserSync = require('browser-sync');
+const changed = require('gulp-changed');
+const concat = require('gulp-concat');
+const csso = require('gulp-csso');
+const del = require('del');
+const imagemin = require('gulp-imagemin');
+const nunjucks = require('gulp-nunjucks');
+const pngquant = require('imagemin-pngquant');
+const postcss = require('gulp-postcss');
+const rename = require('gulp-rename');
+const rev = require('gulp-rev');
+const sass = require('gulp-sass');
+const size = require('gulp-size');
+const svgmin = require('gulp-svgmin');
+const svgSymbols = require('gulp-svg-symbols');
+const terser = require('gulp-terser');
 
 
 // Styles task
-var css = function (done) {
+const css = function (done) {
   // Make sure this feature is activated before running
-	if (!pkg.tasks.css) return done();
+	if (!config.tasks.css) return done();
 
-  return src(pkg.paths.src.css + '**/*.scss')
+  return src(config.css.src)
     .pipe(sass())
     .pipe(postcss())
     .pipe(csso())
     .pipe(size({ title: 'CSS', gzip: true, showFiles: true }))
-    .pipe(dest(pkg.paths.dist.css))
+    .pipe(dest(config.css.dist))
     .pipe(browserSync.stream());
+}
+
+const cssVendor = function (done) {
+  // Make sure this feature is activated before running
+	if (!config.tasks.cssVendor) return done();
+
+  return src(config.cssVendor.src)
+    .pipe(rename({
+      prefix: '_',
+      extname: '.scss'
+    }))
+    .pipe(dest(config.cssVendor.dist));
 }
 
 
 // Scripts task
-var js = function (done) {
+const js = function (done) {
   // Make sure this feature is activated before running
-	if (!pkg.tasks.js) return done();
+	if (!config.tasks.js) return done();
 
-  return src(pkg.globs.js)
-    .pipe(concat(pkg.vars.js))
+  return src(config.js.src)
+    .pipe(concat(config.js.name))
     .pipe(terser())
     .pipe(size({ title: 'JS', gzip: true }))
-    .pipe(dest(pkg.paths.dist.js));
+    .pipe(dest(config.js.dist));
 }
 
 
 // Images task
-var img = function (done) {
+const img = function (done) {
   // Make sure this feature is activated before running
-	if (!pkg.tasks.img) return done();
+	if (!config.tasks.img) return done();
 
-  return src(pkg.paths.src.img + '**/*.{gif,jpg,png,svg,ico}')
-    .pipe(changed(pkg.paths.src.img + '**/*.{gif,jpg,png,svg,ico}'))
+  return src(config.img.src)
+    .pipe(changed(config.img.src))
     .pipe(imagemin([
       imagemin.gifsicle({ interlaced: true }),
       imagemin.mozjpeg({ quality: 50, progressive: true }),
@@ -61,56 +72,56 @@ var img = function (done) {
       imagemin.svgo()
     ]))
     .pipe(size({ title: 'Images', gzip: true }))
-    .pipe(dest(pkg.paths.dist.img));
+    .pipe(dest(config.img.dist));
 }
 
 
-// Sprites task
-var sprites = function (done) {
+// SVG Sprite task
+const svgSprite = function (done) {
   // Make sure this feature is activated before running
-	if (!pkg.tasks.sprites) return done();
+	if (!config.tasks.svgSprite) return done();
 
-  return src(pkg.paths.src.sprites + '**/*.svg')
+  return src(config.svgSprite.src)
     .pipe(svgmin({ plugins: [{ removeViewBox: false }] }))
     .pipe(svgSymbols({ templates: ['default-svg'] }))
-    .pipe(rename(pkg.vars.sprites))
-    .pipe(size({ title: 'Sprites', gzip: true }))
-    .pipe(dest(pkg.paths.dist.sprites));
+    .pipe(rename(config.svgSprite.name))
+    .pipe(size({ title: 'SVG Sprite', gzip: true }))
+    .pipe(dest(config.svgSprite.dist));
 }
 
 
 // Fonts task
-var fonts = function (done) {
+const fonts = function (done) {
   // Make sure this feature is activated before running
-	if (!pkg.tasks.fonts) return done();
+	if (!config.tasks.fonts) return done();
 
-  return src(pkg.paths.src.fonts + '**/*.{woff,woff2}')
-    .pipe(changed(pkg.paths.src.fonts + '**/*.{woff,woff2}'))
-    .pipe(dest(pkg.paths.dist.fonts));
+  return src(config.fonts.src)
+    .pipe(changed(config.fonts.src))
+    .pipe(dest(config.fonts.dist));
 }
 
 
 // Templates task
-var templates = function (done) {
+const templates = function (done) {
 	// Make sure this feature is activated before running
-	if (!pkg.tasks.templates) return done();
+	if (!config.tasks.templates) return done();
 
-  return src(pkg.paths.templates + '*.html')
+  return src(config.templates.src)
 		.pipe(nunjucks.compile())
-    .pipe(dest(pkg.paths.dist.base));
+    .pipe(dest(config.templates.dist));
 };
 
 
-// Revision task
-var revision = function (done) {
+// Version task
+const version = function (done) {
   // Make sure this feature is activated before running
-	if (!pkg.tasks.revision) return done();
+	if (!config.tasks.version) return done();
 
-  return src([pkg.paths.dist.css + '*.css', pkg.paths.dist.js + '*.js'], { base: pkg.paths.dist.base })
+  return src(config.version.src, { base: config.version.base })
     .pipe(rev())
-    .pipe(dest(pkg.paths.dist.base))
+    .pipe(dest(config.version.dist))
     .pipe(rev.manifest())
-    .pipe(dest(pkg.paths.dist.base));
+    .pipe(dest(config.version.dist));
 
   // Signal completion
   done()
@@ -118,12 +129,12 @@ var revision = function (done) {
 
 
 // Clean task
-var clean = function (done) {
+const clean = function (done) {
   // Make sure this feature is activated before running
-	if (!pkg.tasks.clean) return done();
+	if (!config.tasks.clean) return done();
 
 	del.sync(
-		pkg.paths.clean
+		config.clean
 	);
 
 	// Signal completion
@@ -132,13 +143,13 @@ var clean = function (done) {
 
 
 // Server task
-var startServer = function (done) {
+const startServer = function (done) {
 	// Make sure this feature is activated before running
-	if (!pkg.tasks.reload) return done();
+	if (!config.tasks.reload) return done();
 
 	// Initialize BrowserSync
 	browserSync.init({
-    server: pkg.paths.reload
+    server: config.url
 	});
 
 	// Signal completion
@@ -147,9 +158,9 @@ var startServer = function (done) {
 
 
 // Reload the browser when files change
-var reloadBrowser = function (done) {
+const reloadBrowser = function (done) {
   // Make sure this feature is activated before running
-  if (!pkg.tasks.reload) return done();
+  if (!config.tasks.reload) return done();
 
   browserSync.reload();
 
@@ -159,17 +170,14 @@ var reloadBrowser = function (done) {
 
 
 // Watch for changes
-var watchSource = function (done) {
-	// Make sure this feature is activated before running
-  if (!pkg.tasks.reload) return done();
-
-  watch(pkg.paths.src.css + '**/*.scss', series(css));
-  watch(pkg.paths.tailwind, series(css));
-  watch(pkg.paths.src.js + '**/*.js', series(js, reloadBrowser));
-  watch(pkg.paths.src.img + '**/*.{gif,jpg,png,svg,ico}', series(img));
-  watch(pkg.paths.src.sprites + '**/*.svg', series(sprites));
-  watch(pkg.paths.src.fonts + '**/*.{woff,woff2}', series(fonts));
-  watch(pkg.paths.templates + '**/*.html', series(templates, reloadBrowser));
+const watchSource = function (done) {
+	watch(config.css.src, series(css));
+  watch(config.tailwind, series(css));
+  watch(config.js.src, series(js, reloadBrowser));
+  watch(config.img.src, series(img));
+  watch(config.svgSprite.src, series(svgSprite));
+  watch(config.fonts.src, series(fonts));
+  watch(config.templates.watch, series(templates, reloadBrowser));
 
   // Signal completion
   done();
@@ -179,7 +187,8 @@ var watchSource = function (done) {
 // Default task
 exports.default = series(
   clean,
-  parallel(css, js, img, sprites, fonts, templates),
+  cssVendor,
+  parallel(css, js, img, svgSprite, fonts, templates),
   startServer,
   watchSource,
 );
@@ -188,6 +197,7 @@ exports.default = series(
 // Production task
 exports.prod = series(
   clean,
-  parallel(css, js, img, sprites, fonts, templates),
-  revision
+  cssVendor,
+  parallel(css, js, img, svgSprite, fonts, templates),
+  version
 );

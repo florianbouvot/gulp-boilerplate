@@ -32,52 +32,6 @@
   "browserslist": [
     "defaults"
   ],
-  "tasks": {
-    "css": true,
-    "js": true,
-    "img": true,
-    "sprites": true,
-    "fonts": true,
-    "templates": true,
-    "revision": true,
-    "clean": true,
-    "reload": true
-  },
-  "paths": {
-    "src": {
-      "base": "src/",
-      "css": "src/css/",
-      "js": "src/js/",
-      "img": "src/img/",
-      "sprites": "src/icons/",
-      "fonts": "src/fonts/"
-    },
-    "dist": {
-      "base": "dist/",
-      "css": "dist/css/",
-      "js": "dist/js/",
-      "img": "dist/img/",
-      "sprites": "dist/sprites/",
-      "fonts": "dist/fonts/"
-    },
-    "clean": [
-      "dist/**/*",
-      "!dist/"
-    ],
-    "templates": "src/templates/",
-    "tailwind": "tailwind.config.js",
-    "reload": "./dist"
-  },
-  "globs": {
-    "js": [
-      "node_modules/alpinejs/dist/alpine.js",
-      "src/js/main.js"
-    ]
-  },
-  "vars": {
-    "js": "main.js",
-    "sprites": "icons.svg"
-  },
   "scripts": {
     "dev": "gulp",
     "prod": "NODE_ENV=production gulp prod"
