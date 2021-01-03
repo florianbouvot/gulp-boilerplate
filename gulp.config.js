@@ -11,11 +11,7 @@ module.exports = {
     dist: 'src/css/vendor/',
   },
   js: {
-    src: [
-      'node_modules/alpinejs/dist/alpine.js',
-      'node_modules/baguettebox.js/dist/baguettebox.js',
-      'src/js/main.js',
-    ],
+    src: 'src/js/main.js',
     dist: 'dist/js/',
     name: 'main.js',
   },
