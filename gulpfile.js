@@ -17,6 +17,8 @@ const svgmin = require('gulp-svgmin');
 const svgSymbols = require('gulp-svg-symbols');
 const terser = require('gulp-terser');
 
+// Use Dart Sass
+sass.compiler = require('sass');
 
 // Styles task
 const css = function (done) {
