@@ -12,7 +12,7 @@ A boilerplate for building web projects with Gulp 4.
   * Minify with CSSO
   * File versioning for cache-busting (in production)
 * JavaScript
-  * Concatenate
+  * ES6+ transformation with Babel
   * Minify with terser
   * File versioning for cache-busting (in production)
 * Images
