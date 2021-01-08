@@ -15,8 +15,11 @@ const sass = require('gulp-sass');
 const size = require('gulp-size');
 const svgmin = require('gulp-svgmin');
 const svgSymbols = require('gulp-svg-symbols');
-const terser = require('gulp-terser');
-
+const rollup = require("rollup");
+const { babel } = require('@rollup/plugin-babel');
+const commonjs = require('@rollup/plugin-commonjs');
+const { nodeResolve } = require('@rollup/plugin-node-resolve');
+const { terser } = require("rollup-plugin-terser");
 
 // Styles task
 const css = function (done) {
@@ -50,11 +53,23 @@ const js = function (done) {
   // Make sure this feature is activated before running
 	if (!config.tasks.js) return done();
 
-  return src(config.js.src)
-    .pipe(concat(config.js.name))
-    .pipe(terser())
-    .pipe(size({ title: 'JS', gzip: true }))
-    .pipe(dest(config.js.dist));
+  return rollup.rollup({
+    input: config.js.src,
+    plugins: [
+      commonjs(),
+      nodeResolve(),
+      babel({
+        exclude: 'node_modules/**',
+        babelHelpers: 'bundled'
+      }),
+      terser(),
+    ]
+  }).then(bundle => {
+    return bundle.write({
+      file: config.js.dist + config.js.name,
+      format: 'iife'
+    });
+  });
 }
 
 
