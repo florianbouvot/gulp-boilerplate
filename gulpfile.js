@@ -11,14 +11,12 @@ const pngquant = require('imagemin-pngquant');
 const postcss = require('gulp-postcss');
 const rename = require('gulp-rename');
 const rev = require('gulp-rev');
-const sass = require('gulp-sass');
+const sass = require('gulp-dart-sass');
 const size = require('gulp-size');
 const svgmin = require('gulp-svgmin');
 const svgSymbols = require('gulp-svg-symbols');
 const terser = require('gulp-terser');
 
-// Use Dart Sass
-sass.compiler = require('sass');
 
 // Styles task
 const css = function (done) {

@@ -22,14 +22,13 @@
     "gulp-postcss": "^9.0.0",
     "gulp-rename": "^2.0.0",
     "gulp-rev": "^9.0.0",
-    "gulp-sass": "^4.1.0",
+    "gulp-dart-sass": "^1.0.2",
     "gulp-size": "^3.0.0",
     "gulp-svg-symbols": "^3.2.3",
     "gulp-svgmin": "^3.0.0",
     "gulp-terser": "^2.0.0",
     "imagemin-pngquant": "^9.0.1",
-    "postcss": "^8.2.2",
-    "sass": "^1.32.0"
+    "postcss": "^8.2.2"
   },
   "browserslist": [
     "defaults"
