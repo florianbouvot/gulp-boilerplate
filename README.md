@@ -34,7 +34,7 @@ A boilerplate for building web projects with Gulp 4.
 
 ### Prerequisites
 
-Note: if you've previously installed Gulp globally, run `npm rm --global gulp` or `yarn global remove gulp` to remove it. [Details here](https://medium.com/gulpjs/gulp-sips-command-line-interface-e53411d4467).
+Note: if you've previously installed Gulp globally, run `npm rm --global gulp` to remove it. [Details here](https://medium.com/gulpjs/gulp-sips-command-line-interface-e53411d4467).
 
 Make sure these are installed first:
 * [Node.js](https://nodejs.org/)
@@ -43,10 +43,10 @@ Make sure these are installed first:
 ### Quick Start
 
 1. In bash/terminal/command line, `cd` into your project directory.
-2. Run `npm install` or `yarn install`.
+2. Run `npm install`.
 3. Run tasks:
-  * Development server `npm run dev` or `yarn dev`
-  * Production build `npm run prod` or `yarn prod`
+  * Development server `npm run dev`
+  * Production build `npm run prod`
 
 ## Futher reading
 
