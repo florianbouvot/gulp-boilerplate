@@ -16,7 +16,6 @@ const size = require('gulp-size');
 const svgmin = require('gulp-svgmin');
 const svgSymbols = require('gulp-svg-symbols');
 const rollup = require("rollup");
-const { babel } = require('@rollup/plugin-babel');
 const commonjs = require('@rollup/plugin-commonjs');
 const { nodeResolve } = require('@rollup/plugin-node-resolve');
 const { terser } = require("rollup-plugin-terser");
@@ -58,10 +57,6 @@ const js = function (done) {
     plugins: [
       commonjs(),
       nodeResolve(),
-      babel({
-        exclude: 'node_modules/**',
-        babelHelpers: 'bundled'
-      }),
       terser(),
     ]
   }).then(bundle => {
