@@ -40,7 +40,7 @@
     "defaults"
   ],
   "scripts": {
-    "dev": "gulp",
-    "prod": "NODE_ENV=production gulp prod"
+    "start": "gulp",
+    "build": "NODE_ENV=production gulp build"
   }
 }

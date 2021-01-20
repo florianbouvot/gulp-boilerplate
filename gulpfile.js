@@ -209,8 +209,8 @@ exports.default = series(
 );
 
 
-// Production task
-exports.prod = series(
+// Build task
+exports.build = series(
   clean,
   cssVendor,
   parallel(css, js, img, svgSprite, fonts, templates),

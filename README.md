@@ -45,8 +45,8 @@ Make sure these are installed first:
 1. In bash/terminal/command line, `cd` into your project directory.
 2. Run `npm install`.
 3. Run tasks:
-  * Development server `npm run dev`
-  * Production build `npm run prod`
+  * Development server `npm run start`
+  * Production build `npm run build`
 
 ## Futher reading
 
