@@ -11,7 +11,9 @@ module.exports = {
     dist: 'src/css/vendor/',
   },
   js: {
-    src: 'src/js/main.js',
+    src: [
+      'src/js/main.js',
+    ],
     dist: 'dist/js/',
     name: 'main.js',
   },

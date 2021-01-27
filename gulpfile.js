@@ -2,7 +2,6 @@ const config = require('./gulp.config.js');
 const {gulp, src, dest, watch, series, parallel} = require('gulp');
 const browserSync = require('browser-sync');
 const changed = require('gulp-changed');
-const concat = require('gulp-concat');
 const csso = require('gulp-csso');
 const del = require('del');
 const imagemin = require('gulp-imagemin');
@@ -17,6 +16,7 @@ const svgmin = require('gulp-svgmin');
 const svgSymbols = require('gulp-svg-symbols');
 const rollup = require("rollup");
 const commonjs = require('@rollup/plugin-commonjs');
+const multiEntry = require('@rollup/plugin-multi-entry');
 const { nodeResolve } = require('@rollup/plugin-node-resolve');
 const { terser } = require("rollup-plugin-terser");
 
@@ -55,6 +55,7 @@ const js = function (done) {
   return rollup.rollup({
     input: config.js.src,
     plugins: [
+      multiEntry(),
       commonjs(),
       nodeResolve(),
       terser(),
