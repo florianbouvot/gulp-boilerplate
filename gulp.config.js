@@ -39,7 +39,7 @@ module.exports = {
     base: 'dist/',
   },
   clean: [
-    'src/vendor/',
+    'src/css/vendor/',
     'dist/**/*',
     '!dist/',
   ],
