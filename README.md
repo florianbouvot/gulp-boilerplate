@@ -12,7 +12,7 @@ A boilerplate for building web projects with Gulp 4.
   * Minify with CSSO
   * File versioning for cache-busting (in production)
 * JavaScript
-  * Minify with terser
+  * Minify with terser (RollupJs with multi entry support)
   * File versioning for cache-busting (in production)
 * Images
   * Copy
