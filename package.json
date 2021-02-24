@@ -5,14 +5,14 @@
   "author": "Florian Bouvot <florian.bouvot@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "alpinejs": "^2.8.0",
+    "alpinejs": "^2.8.1",
     "baguettebox.js": "^1.11.1",
-    "tailwindcss": "^2.0.2"
+    "tailwindcss": "^2.0.3"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.1.0",
     "@rollup/plugin-multi-entry": "^4.0.0",
-    "@rollup/plugin-node-resolve": "^11.1.1",
+    "@rollup/plugin-node-resolve": "^11.2.0",
     "autoprefixer": "^10.2.4",
     "browser-sync": "^2.26.14",
     "del": "^6.0.0",
@@ -29,8 +29,8 @@
     "gulp-svg-symbols": "^3.2.3",
     "gulp-svgmin": "^3.0.0",
     "imagemin-pngquant": "^9.0.1",
-    "postcss": "^8.2.5",
-    "rollup": "^2.38.5",
+    "postcss": "^8.2.6",
+    "rollup": "^2.39.1",
     "rollup-plugin-terser": "^7.0.2"
   },
   "browserslist": [
