@@ -1,9 +1,15 @@
 {
   "name": "gulp-boilerplate",
-  "version": "1.0.0",
-  "main": "index.js",
+  "private": true,
   "author": "Florian Bouvot <florian.bouvot@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "gulp",
+    "build": "NODE_ENV=production gulp build"
+  },
+  "browserslist": [
+    "defaults"
+  ],
   "dependencies": {
     "alpinejs": "^2.8.1",
     "baguettebox.js": "^1.11.1",
@@ -32,12 +38,5 @@
     "postcss": "^8.2.6",
     "rollup": "^2.39.1",
     "rollup-plugin-terser": "^7.0.2"
-  },
-  "browserslist": [
-    "defaults"
-  ],
-  "scripts": {
-    "start": "gulp",
-    "build": "NODE_ENV=production gulp build"
   }
 }
