@@ -31,20 +31,12 @@ A boilerplate for building web projects with Gulp 4.
 
 ## Getting Started
 
-### Prerequisites
-
-Note: if you've previously installed Gulp globally, run `npm rm --global gulp` to remove it. [Details here](https://medium.com/gulpjs/gulp-sips-command-line-interface-e53411d4467).
-
-Make sure these are installed first:
-* [Node.js](https://nodejs.org/)
-* [Gulp Command Line Utility](http://gulpjs.com/)
-
 ### Quick Start
 
 1. In bash/terminal/command line, `cd` into your project directory.
 2. Run `npm install`.
 3. Run tasks:
-  * Development server `npm run start`
+  * Development server `npm run dev`
   * Production build `npm run build`
 
 ## Futher reading
