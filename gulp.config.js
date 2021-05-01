@@ -1,7 +1,7 @@
 module.exports = {
   url: 'dist/',
   css: {
-    src: 'src/css/**/*.scss',
+    src: 'src/css/',
     dist: 'dist/css/',
   },
   cssVendor: {

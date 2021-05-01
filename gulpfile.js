@@ -25,8 +25,9 @@ const css = function (done) {
   // Make sure this feature is activated before running
 	if (!config.tasks.css) return done();
 
-  return src(config.css.src)
+  return src(config.css.src + "**/*.scss")
     .pipe(sass())
+    .pipe(dest(config.css.src))
     .pipe(postcss())
     .pipe(csso())
     .pipe(size({ title: 'CSS', gzip: true, showFiles: true }))
@@ -182,7 +183,7 @@ const reloadBrowser = function (done) {
 
 // Watch for changes
 const watchSource = function (done) {
-	watch(config.css.src, series(css));
+	watch(config.css.src + "**/*.scss", series(css));
   watch(config.tailwind, series(css));
   watch(config.js.src, series(js, reloadBrowser));
   watch(config.img.src, series(img));
