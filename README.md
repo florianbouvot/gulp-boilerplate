@@ -7,7 +7,7 @@ A boilerplate for building web projects with Gulp 4.
 * CSS
   * Sass compilation
   * Copy and rename CSS vendor to allow Sass import 
-  * PostCSS transformation (Tailwindcss, Autoprefixer)
+  * PostCSS transformation (Tailwindcss with JIT mode, Autoprefixer)
   * Remove unused CSS with PurgeCSS
   * Minify with CSSO
   * File versioning for cache-busting (in production)
