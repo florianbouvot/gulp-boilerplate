@@ -10,7 +10,7 @@ const pngquant = require('imagemin-pngquant');
 const postcss = require('gulp-postcss');
 const rename = require('gulp-rename');
 const rev = require('gulp-rev');
-const sass = require('gulp-dart-sass');
+const sass = require('gulp-sass')(require('sass'));
 const size = require('gulp-size');
 const svgmin = require('gulp-svgmin');
 const svgSymbols = require('gulp-svg-symbols');
@@ -189,7 +189,7 @@ const watchSource = function (done) {
   watch(config.img.src, series(img));
   watch(config.svgSprite.src, series(svgSprite));
   watch(config.fonts.src, series(fonts));
-  watch(config.templates.watch, series(templates, reloadBrowser));
+  watch(config.templates.watch, series(css, templates, reloadBrowser));
 
   // Signal completion
   done();
